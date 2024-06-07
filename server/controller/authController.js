@@ -2,13 +2,9 @@
 import util from 'node:util'
 import UserModel from '../models/userModel.js'
 import jwt from "jsonwebtoken"
-import { log } from 'node:console'
+import sendToken from '../services/sendToken.js';
 
-function sendToken(id) {
-    return jwt.sign({ id }, process.env.SECRET_JWT, {
-        expiresIn: process.env.EXPIRE_JWT
-    })
-}
+
 
 export async function protect(req, res, next) {
     console.log(req.headers);
