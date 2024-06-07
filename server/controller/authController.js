@@ -7,7 +7,7 @@ import sendToken from '../services/sendToken.js';
 
 
 export async function protect(req, res, next) {
-    console.log(req.headers);
+    console.log(req.headers.authorization);
     try {
         let token
         if (req.headers.authorization && req.get("authorization").startsWith("Bearer"))
@@ -30,7 +30,6 @@ export async function protect(req, res, next) {
 
 export async function login(req, res, next) {
     const { email, password } = req.body
-
     if (!email || !password) next("password and email are required")
 
     const user = await UserModel.findOne({ email }).select("password")
